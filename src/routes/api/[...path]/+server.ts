@@ -4,7 +4,7 @@ import { openDb } from '$lib/server/db';
 import type { RequestHandler } from './$types';
 
 const app = createApp({
-	db: openDb(env.DATABASE_URL ?? 'file:local.db', env.DATABASE_AUTH_TOKEN),
+	db: openDb(env.DATABASE_URL ?? 'http://127.0.0.1:8080', env.DATABASE_AUTH_TOKEN),
 	now: () => new Date()
 });
 
