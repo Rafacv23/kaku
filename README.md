@@ -35,6 +35,16 @@ The local database is a [libSQL server](https://github.com/tursodatabase/libsql)
 
 Production uses Turso: set `DATABASE_URL` and `DATABASE_AUTH_TOKEN`.
 
+### Accounts
+
+Sign-in uses [Better Auth](https://better-auth.com) with Google and a one-time email code. Locally nothing needs configuring: the email code is printed to the terminal running `bun dev`, and the Google button is hidden.
+
+| Variable                                      | Outside local development                                   |
+| --------------------------------------------- | ----------------------------------------------------------- |
+| `BETTER_AUTH_SECRET`                          | Required. Signs sessions; generate a long random value      |
+| `BETTER_AUTH_URL`                             | Public origin of the app, for example `https://example.com` |
+| `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` | Enable Google sign-in when both are set                     |
+
 ## Interface
 
 - **Languages**: Spanish and English, with the locale in the URL (`/es`, `/en`). Texts live in `messages/es.json` and `messages/en.json`; a test fails if a key is missing in either. Use them through `m.some_key()` from `$lib/paraglide/messages` and build links with `localizeHref()`.
