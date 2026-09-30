@@ -24,7 +24,10 @@ bun dev
 Los avisos de errores, las correcciones de contenido y los pull requests son bienvenidos. Lee antes la [guía de contribución](CONTRIBUTING.md) y el [código de conducta](CODE_OF_CONDUCT.md). El código, los commits, los issues y la documentación se escriben en inglés.
 
 - `dev` es la rama de integración. Abre los pull requests contra `dev`.
-- `main` es lo que está en producción. Solo recibe merges desde `dev`.
+- `staging` es donde el mantenedor verifica `dev` contra la base de datos de staging. Solo recibe merges desde `dev`.
+- `main` es lo que está en producción. Solo recibe merges desde `staging`.
+
+Al subir cambios a `staging` o `main` se aplican las migraciones pendientes a la base de datos de ese entorno y después se despliega.
 
 ## Licencia
 

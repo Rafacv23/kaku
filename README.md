@@ -46,7 +46,10 @@ Production uses Turso: set `DATABASE_URL` and `DATABASE_AUTH_TOKEN`.
 Bug reports, content fixes and pull requests are welcome. Read the [contributing guide](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md) first.
 
 - `dev` is the integration branch. Open pull requests against `dev`.
-- `main` is what runs in production. It only receives merges from `dev`.
+- `staging` is where the maintainer verifies `dev` against the staging database. It only receives merges from `dev`.
+- `main` is what runs in production. It only receives merges from `staging`.
+
+Pushing to `staging` or `main` applies the pending migrations to that environment's database and then deploys it.
 
 ## Licence
 
