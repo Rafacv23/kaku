@@ -34,8 +34,9 @@ export default defineConfig(
 		}
 	},
 	{
-		// Override or add rule settings here, such as:
-		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			// Links are built with Paraglide's localizeHref(), which adds the locale prefix; resolve() cannot.
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );
