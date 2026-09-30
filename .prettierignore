@@ -9,4 +9,5 @@ bun.lockb
 /static/
 /drizzle/
 /src/lib/paraglide
-/project.inlang/cache
+/project.inlang/*
+!/project.inlang/settings.json
