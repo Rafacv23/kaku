@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "drizzle-kit migrate && vite dev",
+		"dev": "bun run db:up && drizzle-kit migrate && vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -14,7 +14,8 @@
 		"format": "prettier --write .",
 		"test": "bun test",
 		"db:generate": "drizzle-kit generate",
-		"db:migrate": "drizzle-kit migrate"
+		"db:migrate": "drizzle-kit migrate",
+		"db:up": "docker compose up -d --wait"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
