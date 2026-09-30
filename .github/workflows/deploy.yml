@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main, staging]
+
+# Queue runs per branch; never cancel a migration halfway.
+concurrency: deploy-${{ github.ref_name }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Each environment holds its own DATABASE_URL, DATABASE_AUTH_TOKEN and VERCEL_DEPLOY_HOOK.
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+      - run: bun run db:migrate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_AUTH_TOKEN: ${{ secrets.DATABASE_AUTH_TOKEN }}
+      # Vercel does not deploy these branches on push (vercel.json), so the
+      # deployment only starts once the migrations are in.
+      - run: curl --fail --silent --show-error -X POST "$VERCEL_DEPLOY_HOOK"
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}

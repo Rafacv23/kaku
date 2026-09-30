@@ -19,7 +19,7 @@ Open an [issue](https://github.com/Rafacv23/kaku/issues/new/choose) and pick the
 
 ## Pull requests
 
-1. Branch from `dev` and open the pull request against `dev`. `main` is production and only receives merges from `dev`.
+1. Branch from `dev` and open the pull request against `dev`. The maintainer promotes `dev` to `staging` to verify it against the staging database, and `staging` to `main`, which is production. Pull requests against `staging` or `main` from any other branch fail CI.
 2. Before pushing, run what CI runs:
 
    ```sh
@@ -30,7 +30,7 @@ Open an [issue](https://github.com/Rafacv23/kaku/issues/new/choose) and pick the
    ```
 
 3. CI must pass before review. Behaviour changes come with a test.
-4. Pull requests are squash merged, so the pull request title becomes the commit message. Write it in English, in the imperative ("Add kana timed mode").
+4. Pull requests into `dev` are squash merged, so the pull request title becomes the commit message. Write it in English, in the imperative ("Add kana timed mode").
 
 ## Contributor License Agreement
 
