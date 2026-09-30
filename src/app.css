@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+@import '@fontsource/biz-udpmincho/400.css';
+@import '@fontsource/biz-udpmincho/700.css';
+@import '@fontsource/m-plus-2/400.css';
+@import '@fontsource/m-plus-2/500.css';
+@import '@fontsource/m-plus-2/700.css';
+
+/*
+ * Design tokens. The language is paper, ink and space: washi white, sumi black,
+ * the green-grey rule of manuscript paper (genkō yōshi), indigo for actions and
+ * seal red kept for the mark and for reward moments.
+ * Every colour is a light-dark() pair, so a theme is just a `color-scheme`.
+ * Both typefaces cover Japanese and the macron vowels of rōmaji (ā ī ū ē ō).
+ * Spacing uses Tailwind's 0.25rem scale.
+ */
+@theme {
+	--color-*: initial;
+	--color-paper: light-dark(#f5f6f1, #15181d);
+	--color-paper-raised: light-dark(#fcfcf9, #1d2127);
+	--color-ink: light-dark(#1c1f26, #e8e8e1);
+	--color-ink-muted: light-dark(#565c68, #a2a8b3);
+	--color-rule: light-dark(#b9c4b4, #38413c);
+	--color-accent: light-dark(#25477a, #9bb8ea);
+	--color-on-accent: light-dark(#fcfcf9, #15181d);
+	--color-seal: light-dark(#b8322a, #e5766a);
+
+	--font-*: initial;
+	--font-sans: 'M PLUS 2', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'BIZ UDPMincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+
+	--text-*: initial;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.1875rem;
+	--text-xl: 1.5rem;
+	--text-2xl: 2rem;
+	--text-3xl: 2.75rem;
+	--text-4xl: 3.75rem;
+
+	--container-page: 68rem;
+	--container-prose: 38rem;
+
+	--ease-brush: cubic-bezier(0.2, 0.7, 0.1, 1);
+	--duration-quick: 150ms;
+	--duration-settle: 900ms;
+
+	--animate-ink: ink var(--duration-settle) var(--ease-brush) both;
+
+	@keyframes ink {
+		from {
+			opacity: 0;
+			filter: blur(0.08em);
+			transform: translateY(-0.06em);
+		}
+	}
+}
+
+@layer base {
+	:root {
+		color-scheme: light dark;
+		scroll-behavior: smooth;
+		scroll-padding-top: 2rem;
+	}
+
+	:root[data-theme='light'] {
+		color-scheme: light;
+	}
+
+	:root[data-theme='dark'] {
+		color-scheme: dark;
+	}
+
+	body {
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		line-height: 1.65;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+
+	rt {
+		font-family: var(--font-sans);
+		font-size: 0.45em;
+		color: var(--color-ink-muted);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			animation-duration: 0.01ms !important;
+			animation-delay: 0s !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}
