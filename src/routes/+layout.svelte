@@ -1,13 +1,16 @@
 <script lang="ts">
 	import '../app.css';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { authClient } from '$lib/auth-client';
 	import favicon from '$lib/assets/favicon.svg';
+	import Button from '$lib/components/Button.svelte';
 	import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 
-	let { children } = $props();
+	let { data, children } = $props();
 
 	const repo = 'https://github.com/Rafacv23/kaku';
 	const home = $derived(localizeHref('/'));
@@ -16,6 +19,11 @@
 		{ href: `${home}#progress`, label: m.nav_progress() },
 		{ href: repo, label: m.nav_source() }
 	]);
+
+	async function signOut() {
+		await authClient.signOut();
+		await goto(home, { invalidateAll: true });
+	}
 </script>
 
 <svelte:head>
@@ -61,6 +69,13 @@
 			</ul>
 		</nav>
 		<div class="flex items-center gap-1">
+			{#if data.me}
+				<Button variant="quiet" onclick={signOut} class="mr-2">{m.nav_sign_out()}</Button>
+			{:else}
+				<Button variant="quiet" href={localizeHref('/sign-in')} class="mr-2">
+					{m.nav_sign_in()}
+				</Button>
+			{/if}
 			<LocaleSwitcher />
 			<ThemeToggle />
 		</div>
