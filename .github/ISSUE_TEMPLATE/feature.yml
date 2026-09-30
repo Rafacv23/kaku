@@ -1,0 +1,19 @@
+name: Feature proposal
+description: Suggest something Kaku should do
+labels: [needs-triage]
+body:
+  - type: textarea
+    attributes:
+      label: Problem
+      description: What you are trying to do and what gets in the way today.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposal
+      description: What you would like Kaku to do about it.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternatives considered

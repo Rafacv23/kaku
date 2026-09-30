@@ -1,6 +1,12 @@
 # Kaku
 
+English · [Español](README.es.md)
+
 Gamified web app for learning Japanese: kana, spaced repetition, dictionary and grammar practice.
+
+Kaku covers the beginner path up to JLPT N5 in one place, in Spanish and English: kana drills, vocabulary review with curated and personal decks, Anki deck import, an integrated dictionary, grammar practice and a curated resource list. Everything feeds one progress system with XP, levels, a daily goal, streaks, achievements and a global ranking.
+
+Kaku is in early development; most of the above is not built yet.
 
 ## Development
 
@@ -35,7 +41,13 @@ Production uses Turso: set `DATABASE_URL` and `DATABASE_AUTH_TOKEN`.
 - **Design tokens**: colour, type and motion are defined once in `src/app.css` and exposed as Tailwind utilities (`bg-paper`, `text-ink`, `font-display`). Every colour is a light/dark pair, so components never style themes themselves.
 - **Base components**: `src/lib/components`, built on [Bits UI](https://bits-ui.com).
 
-## Branches
+## Contributing
+
+Bug reports, content fixes and pull requests are welcome. Read the [contributing guide](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md) first.
 
 - `dev` is the integration branch. Open pull requests against `dev`.
 - `main` is what runs in production. It only receives merges from `dev`.
+
+## Licence
+
+The code is licensed under [AGPL-3.0](LICENSE). Kaku's own content is CC BY-NC-SA 4.0, and data derived from JMdict and KANJIDIC stays CC BY-SA 4.0. See [NOTICE.md](NOTICE.md) for details and attribution.
