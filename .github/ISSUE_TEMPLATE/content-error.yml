@@ -1,0 +1,30 @@
+name: Content error
+description: A mistake in a card, dictionary entry, grammar point, resource or translation
+labels: [needs-triage]
+body:
+  - type: input
+    attributes:
+      label: Where
+      description: URL of the page, or the deck and card.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Language
+      options:
+        - Spanish
+        - English
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What it should say
+      description: Include a source if you have one.
+    validations:
+      required: true
