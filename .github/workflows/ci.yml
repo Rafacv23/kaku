@@ -3,9 +3,24 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, staging, dev]
 
 jobs:
+  # Code moves dev -> staging -> main; nothing else may target staging or main.
+  promotion:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          case "$BASE" in
+            staging) test "$HEAD" = "$OWNER:dev" ;;
+            main) test "$HEAD" = "$OWNER:staging" ;;
+          esac
+        env:
+          BASE: ${{ github.base_ref }}
+          HEAD: ${{ github.event.pull_request.head.label }}
+          OWNER: ${{ github.repository_owner }}
+
   check:
     runs-on: ubuntu-latest
     steps:

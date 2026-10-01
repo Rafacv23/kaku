@@ -1,0 +1,16 @@
+# Local development database: a libSQL server, the same engine Turso runs in production.
+services:
+  db:
+    image: ghcr.io/tursodatabase/libsql-server:v0.24.33
+    ports:
+      - '127.0.0.1:8080:8080'
+    volumes:
+      - db-data:/var/lib/sqld
+    healthcheck:
+      test: ['CMD', 'bash', '-c', 'echo > /dev/tcp/127.0.0.1/8080']
+      interval: 1s
+      timeout: 2s
+      retries: 30
+
+volumes:
+  db-data:
